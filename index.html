@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adam Harith Haikal | Sportbike-Themed Resume</title>
+
+    <!-- ================================
+        ICONS & FONTS
+    ==================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- ================================
+        SPORTBIKE THEME CSS
+    ==================================-->
+    <style>
+        /* GLOBAL STYLE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ===== VIDEO BACKGROUND ===== */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(100%);
+        }
+
+        /* BACKDROP OVERLAY (SO TEXT IS READABLE) */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #ff1e00, #7a0000);
+            color: black;
+            border-bottom: 3px solid #fff;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: #f9f9f9;
+        }
+
+        /* NAVIGATION BUTTONS */
+        nav {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        nav button {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        nav button:hover {
+            background-color: #ff1e00;
+            color: black;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #ff1e00;
+        }
+
+        nav button.active {
+            background-color: #ff1e00;
+            color: black;
+            border-color: #fff;
+            box-shadow: 0 0 20px #ff0000;
+        }
+
+        /* SECTION BASE STYLES */
+        section {
+            display: none;
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.1);
+            background: rgba(17, 17, 17, 0.9);
+            border-left: 6px solid #ff1e00;
+            animation: fadeIn 0.5s ease;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            color: #ff1e00;
+            text-transform: uppercase;
+        }
+
+        /* ABOUT SECTION */
+        #about {
+            text-align: center;
+        }
+
+        #about img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #ff1e00;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #about img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #ff1e00;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* ===== SKILLS ACCORDION STYLES ===== */
+        .skills-container {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: #1a1a1a;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            box-shadow: 0 0 15px #ff1e00;
+        }
+
+        .skill-title {
+            color: #f5f5f5;
+            padding: 15px 20px;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            background: #222;
+            border-bottom: 1px solid #333;
+        }
+
+        .skill-title .fas {
+            transition: transform 0.3s ease;
+            color: #ff1e00;
+        }
+
+        .skill-item.active .skill-title {
+            color: #ff1e00;
+            background: #000;
+            border-bottom: 1px solid #ff1e00;
+        }
+
+        .skill-item.active .skill-title .fas {
+            transform: rotate(180deg);
+        }
+
+        .skill-details {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.4s ease-in-out;
+            padding: 0 20px;
+            background: #111;
+        }
+
+        .skill-details p {
+            padding: 15px 0;
+            margin: 0;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .skill-item.active .skill-details {
+            max-height: 200px;
+            opacity: 1;
+            padding: 0 20px 20px 20px;
+        }
+
+        /* EXPERIENCE SECTION */
+        .job {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            border-left: 4px solid #ff1e00;
+            transition: all 0.3s ease;
+        }
+
+        .job:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #ff1e00;
+        }
+
+        .job h3 {
+            color: #ff1e00;
+            margin-bottom: 5px;
+        }
+
+        .job p {
+            color: #ccc;
+        }
+
+        /* EDUCATION SECTION */
+        #education {
+            text-align: center;
+        }
+
+        .edu-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .edu-box {
+            flex: 1;
+            min-width: 250px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff1e00;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .edu-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px #ff1e00;
+        }
+
+        .edu-box p {
+            color: #f5f5f5;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* ===== GALLERIES STYLES ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            border: 2px solid #333;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.03);
+            border-color: #ff1e00;
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+
+        /* ===== DOWNLOAD SECTION STYLES (NEW) ===== */
+        #download {
+            text-align: center;
+        }
+        
+        .download-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .resume-preview {
+            max-width: 400px;
+            width: 100%;
+            margin: 20px 0;
+            border: 5px solid #ff1e00;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .resume-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .resume-preview:hover {
+            transform: scale(1.05);
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            background-color: #ff1e00;
+            color: black;
+            font-weight: bold;
+            padding: 15px 35px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            border: 2px solid #fff;
+        }
+
+        .download-button:hover {
+            background-color: black;
+            color: #ff1e00;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 20px #ff1e00, 0 0 5px white;
+        }
+
+        /* CONTACT SECTION */
+        #contact {
+            text-align: center;
+        }
+
+        #contact p {
+            color: #ddd;
+        }
+
+        .social-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 24px;
+            color: #fff;
+            background-color: #1a1a1a;
+            border: 2px solid #ff1e00;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+        }
+
+        .social-icon:hover {
+            background-color: #ff1e00;
+            color: #000;
+            transform: scale(1.2);
+            box-shadow: 0 0 20px #ff1e00;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            .edu-container, .gallery-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== VIDEO BACKGROUND ELEMENT ===== -->
+    <video autoplay muted loop id="bg-video">
+        <source src="Vid-Per.mp4" type="video/mp4">
+    </video>
+
+    <!-- ================================
+        HEADER SECTION
+    ==================================-->
+    <header>
+        <h1>Adam Harith Haikal</h1>
+        <p>Information Management Student | UiTM Kedah</p>
+
+        <!-- NAVIGATION: Added 'Download Resume' button -->
+        <nav>
+            <button class="active" data-section="about">About</button>
+            <button data-section="skills">Skills</button>
+            <button data-section="experience">Experience</button>
+            <button data-section="education">Education</button>
+            <button data-section="galleries">Galleries</button>
+            <button data-section="download">Download Resume</button> <!-- NEW BUTTON -->
+            <button data-section="contact">Contact</button>
+        </nav>
+    </header>
+
+    <!-- ================================
+        ABOUT SECTION
+    ==================================-->
+    <section id="about" class="active">
+        <h2>About Me</h2>
+        <img src="Adam P.png" alt="Adam Harith Haikal Photo">
+        <p>Hello! I’m <strong>Adam Harith Haikal Bin Malike</strong>, a motivated <strong>Diploma in Information Management</strong> student with strong skills in data organization, database management, and digital archiving. Proficient in SQL, Excel, and information retrieval systems, I enjoy transforming raw data into structured, accessible knowledge. Eager to apply my technical and analytical skills in internships or entry-level roles, I aim to contribute to efficient information systems while continuing to learn and grow in the field.</p>
+    </section>
+
+    <!-- ================================
+        SKILLS SECTION (Accordion/Toggle)
+    ==================================-->
+    <section id="skills">
+        <h2>Skills | Performance Specs</h2>
+        <div class="skills-container">
+
+            <!-- Skill Item 1: HTML, CSS, JavaScript -->
+            <div class="skill-item">
+                <h3 class="skill-title">HTML, CSS, JavaScript <i class="fas fa-chevron-down"></i></h3>
+                <div class="skill-details">
+                    <p>Expertise in developing **fully responsive single-page applications**, utilizing vanilla JavaScript for interactive elements and leveraging CSS to apply dynamic, performance-focused styles. Focus on semantic HTML and modern web standards.</p>
+                </div>
+            </div>
+
+            <!-- Skill Item 2: Database Management (SQL) -->
+            <div class="skill-item">
+                <h3 class="skill-title">Database Management (SQL) <i class="fas fa-chevron-down"></i></h3>
+                <div class="skill-details">
+                    <p>Proficient in writing complex **SQL queries** for data retrieval, manipulation, and ensuring **database integrity**. Experienced in designing relational database schemas for efficient information storage and retrieval.</p>
+                </div>
+            </div>
+
+            <!-- Skill Item 3: Basic IT Troubleshooting -->
+            <div class="skill-item">
+                <h3 class="skill-title">Basic IT Troubleshooting <i class="fas fa-chevron-down"></i></h3>
+                <div class="skill-details">
+                    <p>Adept at diagnosing and resolving common hardware and software issues. Possess strong analytical skills to quickly identify root causes and implement effective, timely solutions.</p>
+                </div>
+            </div>
+
+            <!-- Skill Item 4: Team Collaboration -->
+            <div class="skill-item">
+                <h3 class="skill-title">Team Collaboration <i class="fas fa-chevron-down"></i></h3>
+                <div class="skill-details">
+                    <p>Proven ability to work effectively in group projects, adopting a supportive role to achieve collective goals. Highly capable of communicating technical concepts clearly within a team environment.</p>
+                </div>
+            </div>
+
+            <!-- Skill Item 5: Digital Archiving -->
+            <div class="skill-item">
+                <h3 class="skill-title">Digital Archiving <i class="fas fa-chevron-down"></i></h3>
+                <div class="skill-details">
+                    <p>Skilled in creating and managing digital preservation strategies, including data migration, metadata tagging, and organizing digital assets for long-term accessibility and integrity.</p>
+                </div>
+            </div>
+
+            <!-- Skill Item 6: Attention To Detail -->
+            <div class="skill-item">
+                <h3 class="skill-title">Attention To Detail <i class="fas fa-chevron-down"></i></h3>
+                <div class="skill-details">
+                    <p>Meticulous approach to data entry, coding, and record management, minimizing errors and ensuring high standards of data accuracy—essential for critical information systems.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================================
+        EXPERIENCE SECTION
+    ==================================-->
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="job">
+            <h3>Intern – Admission & Record Dept, Putra Medical Centre</h3>
+            <p>Managed and organized medical data systems with precision, ensuring speed and accuracy much like a finely tuned machine.</p>
+        </div>
+
+        <div class="job">
+            <h3>Freelance – Data Entry</h3>
+            <p>Transferred hundreds of physical documents into Google Forms for research purposes.</p>
+        </div>
+
+        <div class="job">
+            <h3>Part-time  – Shop Retailer</h3>
+            <p>Interacting with customers to assist them with purchases, handle sales transactions, and maintain a positive shopping environment.</p>
+        </div>
+    </section>
+
+    <!-- ================================
+        EDUCATION SECTION
+    ==================================-->
+    <section id="education">
+        <h2>Education</h2>
+        <div class="edu-container">
+            <div class="edu-box">
+                <p><strong>Sijil Pelajaran Malaysia (SPM)</strong><br>
+                    Sekolah Menengah Kebangsaan Jitra<br>
+                    Result: 6A 1B 2C+</p>
+            </div>
+
+            <div class="edu-box">
+                <p><strong>Diploma in Information Management</strong><br>
+                    Universiti Teknologi MARA (UiTM) Kedah<br>
+                    Current CGPA: 3.4</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+        GALLERIES SECTION
+    ==================================-->
+    <section id="galleries">
+        <h2>Galleries | Pit Lane Showcase</h2>
+        <p style="text-align: center; color: #ddd;">A visual representation of my passion and dreams!</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="675sr.jpg" alt="CFMoto 675sr">
+            </div>
+            <div class="gallery-item">
+                <img src="Ducati.jpg" alt="Ducati">
+            </div>
+            <div class="gallery-item">
+                <img src="750real.jpg" alt="CFMoto 750sr">
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 20px; color: #aaa;">Showcasing my world on and off the road.</p>
+    </section>
+
+    <!-- ================================
+        DOWNLOAD RESUME SECTION (NEW)
+    ==================================-->
+    <section id="download">
+        <h2>Download | Full Specification Sheet</h2>
+        <div class="download-container">
+            <p style="font-size: 1.1rem; color: #ddd;">Grab the polished, print-ready version of my professional resume.</p>
+            <div class="resume-preview">
+                <!-- 
+                    *** IMPORTANT: Replace the placeholder image URL with an actual image (JPG or PNG) of your resume 
+                    to show a clear preview. 
+                -->
+                <img src="Resume_Adam.png" alt="Professional Resume Preview">
+            </div>
+            <!-- 
+                *** IMPORTANT: Replace the href value with the actual path to your resume PDF file (e.g., 'Adam_Haikal_Resume.pdf').
+                The 'download' attribute ensures it downloads with the specified file name.
+            -->
+            <a href="https://raw.githubusercontent.com/Rynzler-SR/ADAM_HARITH_HAIKAL_PERSONAL_RESUME_WEBSITE/main/Resume_ADAM.pdf" class="download-button">
+                <i class="fas fa-file-pdf"></i> Download Full Resume (PDF)
+            </a>
+            <p style="font-size: 0.9rem; color: #777; margin-top: 10px;">(This file is optimized for printing and formal submission)</p>
+        </div>
+    </section>
+
+    <!-- ================================
+        CONTACT SECTION
+    ==================================-->
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Let’s connect — whether for tech, design, or speed.</p>
+
+        <div class="social-links">
+            <a href="https://www.instagram.com/youknow_adam_/" target="_blank" class="social-icon instagram" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/adam-harith-haikal-bin-malike-7a337730a/" target="_blank" class="social-icon linkedin" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/Rynzler-SR" target="_blank" class="social-icon github" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:adamharithhaikal@gmail.com" class="social-icon email" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================================
+        FOOTER SECTION
+    ==================================-->
+    <footer>
+        <p>© 2025 Adam Harith Haikal | Built with passion & speed.</p>
+    </footer>
+
+    <!-- ================================
+        JAVASCRIPT: NAVIGATION & SKILLS ACCORDION
+    ==================================-->
+    <script>
+        const buttons = document.querySelectorAll("nav button");
+        const sections = document.querySelectorAll("section");
+        const skillItems = document.querySelectorAll(".skill-item");
+
+        // 1. Navigation Logic
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                // Deactivate all buttons and sections
+                buttons.forEach(btn => btn.classList.remove("active"));
+                sections.forEach(sec => sec.classList.remove("active"));
+
+                // Activate the selected button and section
+                button.classList.add("active");
+                document.getElementById(button.dataset.section).classList.add("active");
+            });
+        });
+
+        // 2. Skills Accordion Logic
+        skillItems.forEach(item => {
+            item.addEventListener("click", () => {
+                // Check if the clicked item is already active
+                const wasActive = item.classList.contains("active");
+
+                // Close all other skill items
+                skillItems.forEach(i => i.classList.remove("active"));
+
+                // If it wasn't active, open it
+                if (!wasActive) {
+                    item.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
